@@ -1,0 +1,28 @@
+\section{Resursai}
+	\subsection{Resursų deskriptorius}
+		\begin{enumerate}
+			\item \textbf{RID} - resurso vidinis vardas.
+			\item \textbf{TYPE} - resurso tipas.
+			\item \textbf{PROC} - sąrašas procesų, kurie prašė šio resurso.
+			\item \textbf{STATE} - resurso būsena.
+			\item \textbf{PID} - procesas, sukūręs resursą.
+			\item \textbf{CONTENT} - ???.
+		\end{enumerate}
+	\subsection{Resursų tipai ir magic number}
+		
+		(INT) - resursą norima sukurti dėl programinio arba supervizorinio pertraukimo, tačiau ne dėl timer'io pertraukimo.
+		(USER) - vartotojiškas procesas.
+		
+		\textbf{MagicNumber} - tai yra skaičius, nurodantis resurso tipą.
+		
+		
+	\subsection{Resursų paskirstytojas}
+		Resursų paskirstytojas suteikia paprašytus resursus procesams pagal prioritetus, jo skirstymo pabaigoje kviečiamas procesų paskirstytojas. 
+	\subsection{Resursų primityvai}
+		\begin{enumerate}
+			\item \textbf{Kurti resursą} - procesas kuria resursą. Perduodami parametrai yra tokie: nuoroda į proceso tėvą, resurso vidinis vardas. Resursas pridedamas prie bendrojo resursų sąrašo, taip pat prie tėvo sukurtų resursų sąrašo, sukuriamas resurso elementų sąrašas ir kuriamas laukiančių procesų sąrašas.
+			\item \textbf{Prašyti resurso} - procesui paprašius resurso, jis užsiblokuoja ir yra įtraukiamas į laukiančiųjų resurso procesų sąrašą.
+			\item \textbf{Atlaisvinti resursą} - primityvą kviečia procesas, kuris nori nereikalingą resursą arba perduotį informaciją kitam procesui. Primityvo pabaigoje kviečiamas resursų paskirstytojas.
+			\item \textbf{Naikinti resursą} - resurso deskriptorius išmetamas iš tėvo sukurtų resursų sąrašo, bendrojo resursų sąrašo, atblokuojami procesai, kurie laukė šio resurso, sunaikinamas pats deskriptorius.
+		\end{enumerate}
+		

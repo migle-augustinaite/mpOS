@@ -1,0 +1,35 @@
+\select@language {lithuanian}
+\contentsline {section}{\numberline {1}Projekto sąlygos}{2}{section.1}
+\contentsline {section}{\numberline {2}Realios mašinos modelis}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}Realios mašinos brėžinys}{3}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Realios mašinos registrai}{3}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Taimerio mechanizmas}{4}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Supervizoriniai pertraukimai}{4}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Programiniai pertraukimai}{5}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Realios mašinos rėžimai}{5}{subsection.2.6}
+\contentsline {subsection}{\numberline {2.7}Puslapių transliacija}{5}{subsection.2.7}
+\contentsline {subsection}{\numberline {2.8}Įvedimas ir išvedimas}{5}{subsection.2.8}
+\contentsline {subsection}{\numberline {2.9}Atminties įrenginiai}{5}{subsection.2.9}
+\contentsline {subsection}{\numberline {2.10}Išorinė atmintis}{6}{subsection.2.10}
+\contentsline {section}{\numberline {3}Virtualios mašinos modelis}{7}{section.3}
+\contentsline {subsection}{\numberline {3.1}Virtualios mašinos schema}{7}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Virtualios mašinos samprata}{7}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Virtualios mašinos loginiai komponentai}{7}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}Virtualios mašinos atmintis}{7}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Virtualios mašinos procesorius}{7}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.3}Virtualios mašinos komandų sistema}{8}{subsubsection.3.3.3}
+\contentsline {section}{\numberline {4}Programos pavyzdys}{11}{section.4}
+\contentsline {section}{\numberline {5}Procesai ir jų primityvai}{11}{section.5}
+\contentsline {subsection}{\numberline {5.1}Procesų būsenos}{11}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Būsenų sąryšiai}{11}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Proceso deskriptorius}{12}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Procesų sąrašai}{12}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}Prioritetų sudarymo tvarka}{12}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.6}Sisteminiai procesai}{12}{subsection.5.6}
+\contentsline {subsection}{\numberline {5.7}Procesų planuotojas (Job\_Governor)}{13}{subsection.5.7}
+\contentsline {subsection}{\numberline {5.8}Procesų planuotojo primityvai}{13}{subsection.5.8}
+\contentsline {section}{\numberline {6}Resursai}{14}{section.6}
+\contentsline {subsection}{\numberline {6.1}Resursų deskriptorius}{14}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Resursų tipai ir magic number}{14}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Resursų paskirstytojas}{14}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.4}Resursų primityvai}{14}{subsection.6.4}

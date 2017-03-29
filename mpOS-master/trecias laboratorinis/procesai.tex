@@ -1,0 +1,62 @@
+\section{Procesai ir jų primityvai}
+	\subsection{Procesų būsenos}
+		\begin{itemize}
+			\item \textbf{READY} - procesas, laukiantis procesoriaus.
+			\item \textbf{STOPPED} - procesas, sustabdytas kito proceso. 
+			\item \textbf{BLOCKED} - procesas, prašantis resurso.
+			\item \textbf{RUNNING} - vykdomas procesas.
+		\end{itemize}
+	\subsection{Būsenų sąryšiai}
+		\begin{enumerate}
+			\item READY -> RUNNING - paskisrtytojas paskiria procesorių procesui.
+			\item READY ->  READY-STOPPED - pasiruošęs procesas buvo sustabdytas einamojo proceso.
+			\item READY-STOPPED -> READY - einamasis procesas "nuima" būseną sustabdytas, tačiau jis laukia procesoriaus.
+			\item RUNNING -> BLOCKED - procesas užblokuojamas, kai paprašo resurso.
+			\item RUNNING -> READY - iš proceso "atimamas" procesorius ir jam netrūksta resursų.
+			\item BLOCKED -> BLOCKED-STOPPED - einamasis procesas sustabdo blokuotą procesą.
+			\item BLOCKED -> READY - procesas gauna reikiamą resursą.
+			\item BLOCKED-STOPPED -> READY-STOPPED - gauna resursą, tačiau procesas vis dar sustabdytas.
+			\item BLOCKED-STOPPED -> BLOCKED - einamasis procesas "nuima" būseną sustabdytas, tačiau jam vis dar reikia resurso.
+		\end{enumerate}
+	\subsection{Proceso deskriptorius}
+		\begin{itemize}
+			\item PID - proceso vidinis vardas.
+			\item PPID - proceso tėvo vidinis vardas.
+			\item STATE - proceso būsena.
+			\item PTR - puslapiavimo lentelės adresas.
+			\item RES - laukiamų resursų sąrašas.
+			\item REG - registrai (R1,R2,SF,IC) .
+			\item CRES - proceso sukurtų resursų sąrašas.
+		\end{itemize}
+	\subsection{Procesų sąrašai}
+		\begin{enumerate}
+			\item \textbf{Procesų prioritetų sąrašas} - nurodomas proceso vidinis vardas ir jo prioritetas.
+			\item \textbf{Blokuotų procesų sąrašas} - sąrašas užblokuotų procesų.
+			\item \textbf{Pasiruošusių procesų sąrašas} - sąrašas pasiruošusių procesų.
+			\item  \textbf{Resursų sąrašas} - nurodomas resurso vidinis vardas.
+		\end{enumerate}
+	\subsection{Prioritetų sudarymo tvarka}
+		Prioritetų reikšmės bus skiriamos nuo 0 iki 100. Sisteminiai procesai turės didesnį prioritetą, nei vartotojo. Kiekvieną kartą procesui gavus procesorių, jo prioritetas sumažinamas vienetu. /*ar yra apatinės ribos sisteminiams procesams?*/ Vartotojas turi galimybę nustatyti prioriteto reikšmę rankiniu būdu (load funkcijos metu).
+	\subsection{Sisteminiai procesai}
+		Sisteminiai procesai sukuriami paleidžiant sistemą, o sunaikinami tik sistemai baigus darbą. Jie yra pasiruošę dirbti visą sistemos gyvavimo laiką. 
+		\begin{itemize}
+			\item \textbf{Start\_Stop} - Visų procesų tėvinis procesas; kuria ir naikina sisteminius procesus ir resursus. Visalaiką užsiblokavęs, kol dirba OS. PID - 1.
+			\item \textbf{Job\_Governor} - procesų paskirstytojas, tvarkantis virtualių mašinų darbą. PID - 2.
+			\item \textbf{Loader} - užkrauna procesą iš išorinės atminties į vidinę atmintį. PID - 3.
+			\item \textbf{Chan\_1\_Device} - perrašo duomenis tarp išorinės atminties ir vidinės atminties. PID - 4.
+			\item \textbf{Interrupt} - procesas, kuris, įvykus pertraukimui, jį identifikuoja ir siunčia pranešimą Job\_Governor. PID - 5.
+			\item \textbf{Get\_Put\_Data} - ???.
+			\item \textbf{Print\_Lines} - atspausdina eilutę į ekraną. PID - 7.
+			\item  \textbf{Process\_Killer} - ištrina programą ir jos sukurtus resursus iš vidinės atminties. PID - 8.
+			\item \textbf{Resource\_Manager} - resursų paskirstytojas. PID - 9.
+		\end{itemize}
+	\subsection{Procesų planuotojas (Job\_Governor)}
+		Procesų planuotojas iškviečiamas kiekvieną kartą, kai iššaukiamas timer'io pertraukimas. Taip pat jis gali būti kviečiamas procesui baigus darbą arba jam užsiblokavus. Iškvietus planuotoją, imamas kitas READY būsenos procesas pagal didžiausią prioritetą.
+	\subsection{Procesų planuotojo primityvai}
+		\begin{enumerate}
+			\item \textbf{Kurti procesą} - šiam primityvui perduodama nuoroda į jo tėvą, pradinė proceso būsena, jo prioritetas, vidinis vardas. Primityvo viduje kuriamas procesas, jis įdedamas į atitinkamus sąrašus (pasiruošusių/blokuotų), sukuriamas jo vaikų sąrašas.
+			\item \textbf{Naikinti procesą} - pirmiausia sunaikinami proceso sukurti vaikiniai procesai bei resursai. Tada procesas pašalinamas iš sąrašų, kuriems jis priklauso. Pabaigoje sunaikinami procesui perduoti resursai ir jo pačio deskriptorius.
+			\item \textbf{Stabdyti procesą} - proceso būsena pakeičiama iš BLOCKED į BLOCKED-STOPPED arba iš READY į READY-STOPPED.
+			\item  \textbf{Aktyvuoti procesą} - būsena keičiama iš BLOCKED-STOPPED į BLOCKED arba iš READY-STOPPED į READY.
+		\end{enumerate}
+	\clearpage
