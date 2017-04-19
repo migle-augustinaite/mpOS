@@ -1,0 +1,24 @@
+\section{Programos pavyzdys}
+	Mūsų programos pavyzdys atliks aritmetinius veiksmus ir juos išspausdins į ekraną.\\
+	Programa skaičiuos šį reiškinį: \(45^2 + 13*4 - 3\)\\\\
+	DATASEG\\
+	DW 45\\
+	DW 13\\
+	DW 4\\
+	DW 3\\
+	CODESEG\\
+	LW01\\
+	PUSH\\
+	PUSH\\
+	MUL\\
+	LW02\\
+	PUSH\\
+	LW03\\
+	PUSH\\
+	MUL\\
+	ADD\\
+	LW04\\
+	PUSH\\
+	SUB\\
+	PRNS\\
+	HALT\\

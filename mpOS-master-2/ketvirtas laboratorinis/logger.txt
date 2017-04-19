@@ -1,0 +1,12 @@
+Load for program BB ended
+There already is program loaded with this name BB
+FO; handler: 0
+Interrupt: Duplicate name
+FD; handler: 0
+Interrupt: Duplicate name
+HALT
+FO; handler: 0
+Interrupt: Duplicate name
+FD; handler: 0
+Interrupt: Duplicate name
+HALT

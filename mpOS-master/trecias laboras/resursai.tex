@@ -1,0 +1,97 @@
+\section{Resursai}
+	\subsection{Resursų deskriptorius}
+		\begin{enumerate}
+			\item \textbf{RID} - resurso vidinis vardas.
+			\item \textbf{TYPE} - resurso tipas.
+			\item \textbf{PROC} - sąrašas procesų, kurie prašė šio resurso.
+			\item \textbf{STATE} - resurso būsena.
+			\item \textbf{PID} - procesas, sukūręs resursą.
+			\textbf{}
+		\end{enumerate}
+	\subsection{Resursų tipai ir magic number}
+		
+		(INT) - resursą norima sukurti dėl programinio arba supervizorinio pertraukimo, tačiau ne dėl timer'io pertraukimo.
+		(USER) - vartotojiškas procesas.
+		
+		Resursų tipai, jų aprašymai, susiję procesai ir šių resursų MagicNumber (nurodomas kaip numeris sąraše):\\
+		
+		\begin{tabular}{| p{1,5cm} |*{3} {p{2,8cm} |} p{5cm}|}
+			\hline
+			Magic Number	& Pavadinimas	& Laukiantysis Procesas	& Kuriantysis Procesas	& Aprašymas\\
+			\hline
+			1 				& OSExit		& Start\_Stop			& ProcessKiller			& OS darbo baigimas.\\
+			\hline
+			2				& ReadBlock		& Get\_Put\_Data		& (bet koks)			& Blokas, esantis atmintyje, įrašomas į duomenų segmentą.\\
+			\hline
+			3				& WriteBlock	& Get\_Put\_Data		& (bet koks)			& Blokas, esantis duomenų segmente, įrašomas į  vietą, nurodytą atmintyje.\\
+			\hline
+			4				& ReadWord		& Get\_Put\_Data		& (bet koks)			& Žodis, esantis atmintyje, įrašomas į duomenų segmentą.\\	
+			\hline
+			5				& WriteWord		& Get\_Put\_Data		& (bet koks)			& Žodis, esantis duomenų segmente, įrašomas į vietą, nurodytą atmintyje.\\
+			\hline
+			6				& NeedInput		& Chan\_2\_Device		& (INT)					& Įvedimo srautas iš vartotojo.\\
+			\hline
+			7				& NeedOutput	& Chan\_3\_Device		& (INT)					& Išvedimo srautas į ekraną.\\
+			\hline
+			8				& ReadFile		& Chan\_1\_Device		& (INT)					& Failo nuskaitymas.\\
+			\hline
+			9				& OpenFile		& Chan\_1\_Device		& (INT)					& Failo atidarymas.\\
+			\hline
+			10				& WriteFile		& Chan\_1\_Device		& (INT)					& Rašymas į failą.\\
+			\hline
+			11				& CloseFile		& Chan\_1\_Device		& (INT)					& Failo uždarymas.\\
+			\hline
+			12				& DeleteFile	& Chan\_1\_Device		& (INT)					& Failo ištrinimas pagal nurodytą deskriptorių.\\
+			\hline
+			13				& SeekFile		& Chan\_1\_Device		& (INT)					& Pozicijos faile pakeitimas.\\
+			\hline
+			14				& ProgramStart	& Loader				& (INT)					& Programos pakrovimas į atmintį.\\
+			\hline
+			15				& ProgramHalt	& ProcessKiller			& (INT)					& Programos sustabdymas.\\
+			\hline
+			
+		\end{tabular}
+		
+		\begin{enumerate}
+			\item \textbf{OSExit} - OS darbo baigimas. Laukia Start\_Stop procesas, kuria - ProcessKiller. \\
+			
+			\textbf{Resursai, skirti darbui su vidine atmintimi}: Kuriantys procesai gali būti bet kokie, o laukiantis - visada Get\_Put\_Data.
+			
+			\item \textbf{ReadBlock} - Blokas, esantis atmintyje, atmintyje, įrašomas į duomenų segmentą.
+			\item \textbf{WriteBlock} - Blokas, esantis duomenų segmente, įrašomas į vietą, nurodytą atmintyje.
+			\item \textbf{ReadWord} - Žodis, esantis atmintyje, įrašomas į duomenų segmentą.
+			\item \textbf{WriteWord} - Žodis, esantis duomenų segmente, įrašomas į vietą, nurodytą atmintyje.\\
+			
+			\textbf{Resursai, skriti darbui su srautais}:
+			
+			\item \textbf{NeedInput} - Įvedimo srautas iš vartotojo. Laukia Chan\_2\_Device, kuria - (INT). 
+			\item \textbf{NeedOutput} -Išvedimo srautas į ekraną.
+			Laukia Chan\_3\_Device, kuria - (INT).\\
+			
+			\textbf{Resursai, skirti darbui su failais}: Kuriantysis procesas visada (INT), o laukiantysis - Chan\_1\_Device.
+			
+			\item \textbf{ReadFile} - Failo nuskaitymas.
+			\item \textbf{OpenFile} - Failo atidarymas.
+			\item \textbf{WriteFile} - Rašymas į failą.
+			\item \textbf{CloseFile} - Failo uždarymas
+			\item \textbf{DeleteFile} - Failo ištrinimas pagal nurodytą deskriptorių.
+			\item \textbf{SeekFile} - Pozicijos faile pakeitimas.\\
+			
+			\textbf{Resursui, skirti darbui su programomis}:
+			
+			\item \textbf{ProgramStart} - Programos pakrovimas į atmintį. Laukia Loader procesas, kuria - (INT).
+			\item \textbf{ProgramHalt} - Programos sustabdymas. Laukia ProcessKiller procesas, kuria - (INT).
+			
+		\end{enumerate}
+		
+		
+	\subsection{Resursų paskirstytojas}
+		Resursų paskirstytojas suteikia paprašytus resursus procesams pagal prioritetus, jo skirstymo pabaigoje kviečiamas procesų paskirstytojas. 
+	\subsection{Resursų primityvai}
+		\begin{enumerate}
+			\item \textbf{Kurti resursą} - procesas kuria resursą. Perduodami parametrai yra tokie: nuoroda į proceso tėvą, resurso vidinis vardas. Resursas pridedamas prie bendrojo resursų sąrašo, taip pat prie tėvo sukurtų resursų sąrašo, sukuriamas resurso elementų sąrašas ir kuriamas laukiančių procesų sąrašas.
+			\item \textbf{Prašyti resurso} - procesui paprašius resurso, jis užsiblokuoja ir yra įtraukiamas į laukiančiųjų resurso procesų sąrašą.
+			\item \textbf{Atlaisvinti resursą} - primityvą kviečia procesas, kuris nori nereikalingą resursą arba perduotį informaciją kitam procesui. Primityvo pabaigoje kviečiamas resursų paskirstytojas.
+			\item \textbf{Naikinti resursą} - resurso deskriptorius išmetamas iš tėvo sukurtų resursų sąrašo, bendrojo resursų sąrašo, atblokuojami procesai, kurie laukė šio resurso, sunaikinamas pats deskriptorius.
+		\end{enumerate}
+		
